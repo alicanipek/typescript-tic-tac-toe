@@ -4,6 +4,7 @@ import Board from "./Board";
 
 type History = {
 	squares: Array<string>;
+	moveNo: number;
 };
 
 type GameState = {
@@ -20,7 +21,8 @@ class Game extends React.Component<GameProps, GameState> {
 		this.state = {
 			history: [
 				{
-					squares: Array(9).fill(null)
+					squares: Array(9).fill(null),
+					moveNo: 0
 				}
 			],
 			xIsNext: true,
@@ -39,7 +41,8 @@ class Game extends React.Component<GameProps, GameState> {
 		this.setState({
 			history: history.concat([
 				{
-					squares: squares
+					squares: squares,
+					moveNo: i
 				}
 			]),
 			stepNumber: history.length,
@@ -71,7 +74,8 @@ class Game extends React.Component<GameProps, GameState> {
 								: ""
 						}
 					>
-						{desc}
+						{desc} - ({Math.floor(history[move].moveNo / 3)},{" "}
+						{history[move].moveNo % 3})
 					</button>
 				</li>
 			);
