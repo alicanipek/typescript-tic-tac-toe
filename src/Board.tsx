@@ -5,6 +5,7 @@ import Square from "./Square";
 
 type BoardProp = {
 	squares: Array<string>;
+	winning: Array<Number>;
 	onClick: (ev: React.MouseEvent<HTMLButtonElement>, i: number) => void;
 };
 
@@ -17,6 +18,7 @@ class Board extends React.Component<BoardProp, BoardState> {
 		return (
 			<Square
 				key={i}
+				isWinning={this.props.winning.includes(i)}
 				value={this.props.squares[i]}
 				onClick={e => this.props.onClick(e, i)}
 			/>
@@ -24,7 +26,7 @@ class Board extends React.Component<BoardProp, BoardState> {
 	}
 	createBoard() {
 		let board = [];
-		let squareCount = 1;
+		let squareCount = 0;
 		for (let row = 0; row < 3; row++) {
 			let cols = [];
 			for (let col = 0; col < 3; col++) {
