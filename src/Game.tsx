@@ -85,6 +85,8 @@ class Game extends React.Component<GameProps, GameState> {
 		let status;
 		if (winner.length) {
 			status = "Winner is " + current.squares[winner[0]];
+		} else if (current.squares.filter(x => x != null).length === 9) {
+			status = "Draw";
 		} else {
 			status = "Next player is " + (this.state.xIsNext ? "X" : "O");
 		}
